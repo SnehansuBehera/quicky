@@ -30,6 +30,7 @@ const AuthForm = () => {
     useEffect(() => {
         if (session?.status === 'authenticated') {
             console.log('Authenticated');
+            setLoading(true);
             router.push('/users')
         }
     }, [session?.status, router])
@@ -50,13 +51,15 @@ const AuthForm = () => {
                 if (callback?.error) {
                     toast.error('Invalid credentials');
                 } else {
-                    toast.success('Login successfull')
+                    toast.success('Login successfull');
+                    router.push('/users');
                 }
             }).finally(() => setLoading(false))
 
         } else {
             axios.post('/api/register', data)
-                .catch(() => toast.error("Something went wromg")).finally(() => setLoading(false))
+                .then(() => signIn('credentials', { ...data, redirect: false }))
+                .catch(() => toast.error("Something went wrong")).finally(() => setLoading(false))
         }
     }
 
