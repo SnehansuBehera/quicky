@@ -2,9 +2,8 @@
 const nextConfig = {
     experimental: {
         appDir: true,
-        // Adjust swcPlugins to ensure it is properly formatted
         swcPlugins: [
-            ['next-superjson-plugin', {}] // Wrap in an array
+            ['next-superjson-plugin', {}]
         ]
     },
     images: {
@@ -14,8 +13,7 @@ const nextConfig = {
             'avatars.githubusercontent.com'
         ]
     },
-    reactStrictMode: true,
-    debug: true, // Move this outside experimental if it should remain
+
 };
 
 export default nextConfig;
